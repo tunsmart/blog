@@ -9,8 +9,11 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.save
-    redirect_to @post, :notice => 'Post was created successfully.'
+    if @post.save
+    redirect_to @post
+  else
+    render 'new'
+  end
   end
 
   def show
@@ -25,7 +28,7 @@ class PostsController < ApplicationController
 
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
-      flash[:success] = "Post updated"
+      
       redirect_to @post
 
     else
