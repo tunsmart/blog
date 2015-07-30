@@ -1,0 +1,12 @@
+<h1>Submitted Posts</h1>
+<div class = "jumbotron">
+  <p>Take a look at my recently submitted posts </p>
+  <ul>
+    <% @posts.each do |post| %>
+    <li>
+      Title: <%= post.title %> Content: <%= post.body %> Submitted <%= time_ago_in_words(post.created_at) %> Ago
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+    <% end %>
+  </ul>
+</div>
