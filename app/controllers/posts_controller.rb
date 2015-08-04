@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  
   def index
-    @posts = Post.all
+    @posts = Post.all.order('created_at DESC')
   end
 
   def new
@@ -28,7 +30,7 @@ class PostsController < ApplicationController
 
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
-      
+
       redirect_to @post
 
     else
